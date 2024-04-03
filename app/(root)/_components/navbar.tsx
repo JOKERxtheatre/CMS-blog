@@ -1,29 +1,37 @@
-import GlobalSearch from "@/components/shared/global-search";
-import { navLinks } from "@/constants";
-import { Search } from "lucide-react";
-import Link from "next/link";
-import React from "react";
-import ModeTheme from "./mode-theme";
+"use client";
 
+import ModeTheme from "../../../components/shared/mode-theme";
+import { navLinks } from "@/constants";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import GlobalSearch from "@/app/(root)/_components/global-search";
 const Navbar = () => {
+  const pathname = usePathname();
   return (
-    <div className="fixed w-full h-[10vh] backdrop-blur-lg border-b-2 border-inherit inset-0">
-      <div className="w-full flex items-center justify-between h-[10vh] px-12 py-2">
-        <Link href={"/"} className="text-3xl font-createRound">
-          <span>Xumoyun</span>
+    <div className="h-[10vh] backdrop-blur-xl border-b fixed z-40 inset-0 bg-background/50">
+      <div className="container max-w-6xl mx-auto h-[10vh] w-full flex items-center justify-between">
+        {/* Logo */}
+        <Link href={"/"}>
+          <h1 className="text-4xl font-creteRound">Xumoyun</h1>
         </Link>
+        {/* Nav links */}
         <div className="gap-2 hidden md:flex">
           {navLinks.map((nav) => (
             <Link
-              href={nav.route}
               key={nav.route}
-              className="hover:bg-blue-400/20 px-2 rounded-sm py-1"
+              href={nav.route}
+              className={cn(
+                "hover:bg-blue-400/20 py-1 px-3 cursor-pointer rounded-sm transition-colors",
+                pathname === nav.route && "text-blue-400"
+              )}
             >
               {nav.name}
             </Link>
           ))}
         </div>
-        <div className="flex items-center gap-2">
+        {/* Search */}
+        <div className="flex items-center gap-1">
           <GlobalSearch />
           <ModeTheme />
         </div>

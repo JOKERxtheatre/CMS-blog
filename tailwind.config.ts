@@ -57,7 +57,6 @@ const config = {
         createRound: ["var(--font-createRound)"],
         workSans: ["var(--font-workSans)"],
       },
-
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -79,7 +78,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"),require('@tailwindcss/typography')],
 } satisfies Config;
 
 export default config;
